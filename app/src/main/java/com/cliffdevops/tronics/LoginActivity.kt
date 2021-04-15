@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -27,15 +26,20 @@ class LoginActivity : AppCompatActivity() {
         val userPassCodeET: EditText = findViewById(R.id.txtPasscode)
         val startBtn: Button = findViewById(R.id.LogInBtn)
 
+        val test1: String = "16-0128"
+        val test2: String = "Tronics123"
 
-        startBtn.setOnClickListener(View.OnClickListener {
-            val userId: String = userIdET.text.toString()
-            val userSecret: String = userPassCodeET.text.toString()
+        userIdET.setText(test1)
+        userPassCodeET.setText(test2)
+
+        startBtn.setOnClickListener {
+            val userId: String = userIdET.text.toString().trim()
+            val userSecret: String = userPassCodeET.text.toString().trim()
             if (validateInputs()) {
                 postVolley(userId, userSecret)
             }
 
-        })
+        }
 
     }
 
@@ -66,13 +70,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun postVolley(user_id: String, user_code: String) {
         val queue = Volley.newRequestQueue(this)
-        val url = "https://myloanapp.000webhostapp.com/DUFleet/dufleet_login.php"
+        val url = "https://myloanapp.000webhostapp.com/tronics/mobile/tronics_login.php"
         val sharedPreferences: SharedPreferences = this.getSharedPreferences(
             sharedPrefFile,
             Context.MODE_PRIVATE
         )
 
-        var progress = ProgressDialog(this)
+        val progress = ProgressDialog(this)
         progress.setMessage("Please Wait...")
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progress.show()
@@ -82,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
                 Response.Listener { response ->
                     // response
                     progress.hide()
+
                     val strResp = response.toString()
                     Log.d("API_M", strResp)
 
@@ -100,20 +105,22 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this, HomeActivity::class.java))
                         overridePendingTransition(0, 0)
 
-                    }else if(success == "0"){
-                        Toast.makeText(this,"Invalid username/password",Toast.LENGTH_SHORT).show()
+                    } else if (success == "0") {
+                        Toast.makeText(this, "Invalid username/password", Toast.LENGTH_SHORT).show()
                     }
 
                 },
                 Response.ErrorListener { error ->
                     progress.hide()
                     Log.d("API_M", "error => $error")
-                    Toast.makeText(this, "Invalid username/password \n error: $error",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Invalid username/password \n error: $error",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             ) {
                 override fun getParams(): MutableMap<String, String> {
-                    var map = HashMap<String, String>()
+                    val map = HashMap<String, String>()
                     map["staff_id"] = user_id
                     map["password"] = user_code
 
@@ -122,5 +129,4 @@ class LoginActivity : AppCompatActivity() {
             }
         queue.add(stringReq)
     }
-
 }

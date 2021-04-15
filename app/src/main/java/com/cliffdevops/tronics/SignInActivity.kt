@@ -108,7 +108,7 @@ class SignInActivity : AppCompatActivity() {
         )
     }
 
-    private fun dialogMessage( codeValue:String) {
+    private fun dialogMessage(codeValue: String) {
 
         val mDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_view, null)
         val mBuilder = AlertDialog.Builder(this)
@@ -118,8 +118,8 @@ class SignInActivity : AppCompatActivity() {
 
         val handler = Handler()
         handler.postDelayed({
-            val intent  = Intent(this, ResultsActivity::class.java)
-            intent.putExtra("codeValue",codeValue)
+            val intent = Intent(this, ResultsActivity::class.java)
+            intent.putExtra("codeValue", codeValue)
             startActivity(intent)
             overridePendingTransition(0, 0)
 

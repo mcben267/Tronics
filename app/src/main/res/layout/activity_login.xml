@@ -52,6 +52,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/black"
             app:boxBackgroundMode="outline"
+            android:layout_marginTop="10dp"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
