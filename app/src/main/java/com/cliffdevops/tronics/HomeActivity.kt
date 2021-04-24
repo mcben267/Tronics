@@ -30,6 +30,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         val signIn: Button = findViewById(R.id.signInBtn)
         val searchBtn: Button = findViewById(R.id.btnSearch)
         val gatePass: Button = findViewById(R.id.gatePassBtn)
+        val viewLogs: Button = findViewById(R.id.viewLogsBtn)
         searchCardView = findViewById(R.id.searchView)
         searchCardView.visibility = View.GONE
 
@@ -39,6 +40,7 @@ class HomeActivity : AppCompatActivity(), View.OnClickListener {
         signOut.setOnClickListener(this)
         searchBtn.setOnClickListener(this)
         gatePass.setOnClickListener(this)
+        viewLogs.setOnClickListener(this)
 
     }
 

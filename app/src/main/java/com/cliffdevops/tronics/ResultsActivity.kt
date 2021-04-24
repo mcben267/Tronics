@@ -19,7 +19,7 @@ import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
 
-class ResultsActivity : AppCompatActivity() {
+class ResultsActivity : AppCompatActivity(), DeviceAdapter.OnItemClickListener {
 
     private lateinit var userName: TextView
     private lateinit var userMajor: TextView
@@ -28,45 +28,30 @@ class ResultsActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     val list = ArrayList<DeviceItem>()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
 
-        userCode = intent.getStringExtra("codeValue").toString()
-        //val exampleList = generateDummyList(10)
+        userCode = intent.getStringExtra("codeValue")
 
-        //val devicesList = userDevices(userCode)
         recyclerView = findViewById(R.id.recycler_view)
-
-
         userName = findViewById(R.id.lblName)
         userID = findViewById(R.id.lblStudentId)
         userMajor = findViewById(R.id.lblMajor)
 
-
-        //updateRecyclerView(userCode)
-        Toast.makeText(this, "data: $userCode", Toast.LENGTH_SHORT).show()
         userDetails(userCode)
         userDevices(userCode)
 
     }
-
-    /* private fun updateRecyclerView(inputCode: String) {
-         val devicesList = userDevices(inputCode)
-         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-         recyclerView.adapter = DeviceAdapter(devicesList)
-         recyclerView.layoutManager = LinearLayoutManager(this)
-         recyclerView.setHasFixedSize(true)
-     }*/
 
     private fun userDetails(user_code: String) {
 
         val queue = Volley.newRequestQueue(this)
         val url = "https://myloanapp.000webhostapp.com/tronics/mobile/tronics_users.php"
 
-
         val progress = ProgressDialog(this)
-        progress.setMessage("fetching data...")
+        progress.setMessage("Fetching data...")
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER)
         progress.show()
 
@@ -122,7 +107,6 @@ class ResultsActivity : AppCompatActivity() {
 
         val queue = Volley.newRequestQueue(this)
         val url = "https://myloanapp.000webhostapp.com/tronics/mobile/tronics_devices.php"
-        //val list = ArrayList<DeviceItem>()
 
         val stringReq: StringRequest =
             object : StringRequest(
@@ -150,17 +134,14 @@ class ResultsActivity : AppCompatActivity() {
                                 "Vendor: $deviceVendor"
                             )
                             list += item
-
-
                         }
-                        recyclerView.adapter = DeviceAdapter(list)
+                        recyclerView.adapter = DeviceAdapter(list, this)
                         recyclerView.layoutManager = LinearLayoutManager(this)
                         recyclerView.setHasFixedSize(true)
 
+
                     } else if (success == "0") {
                         Toast.makeText(this, "No Devices Record found", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, HomeActivity::class.java))
-                        overridePendingTransition(0, 0)
                     }
 
                 },
@@ -185,7 +166,17 @@ class ResultsActivity : AppCompatActivity() {
 
     private fun userPhoto(profilePic: String) {
         val imageView: ImageView = findViewById(R.id.profilePic)
-        Picasso.get().load(profilePic).placeholder(R.drawable.ic_account).into(imageView);
+        Picasso.get().load(profilePic).placeholder(R.drawable.ic_account).into(imageView)
+    }
+
+    override fun onItemClick(position: Int) {
+        val currentItem = list[position]
+        val intent = Intent(this, DecisionActivity::class.java)
+        intent.putExtra("owner", userName.text)
+        intent.putExtra("id", userID.text)
+        intent.putExtra("serial", currentItem.serial.substring(7))
+        startActivity(intent)
+        overridePendingTransition(0, 0)
     }
 
     /*   private fun generateDummyList(size: Int): List<DeviceItem> {

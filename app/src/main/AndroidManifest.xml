@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tronics"
         android:usesCleartextTraffic="true">
+        <activity android:name=".DecisionActivity"></activity>
         <activity android:name=".GatepassActivity" />
         <activity android:name=".LogsActivity" />
         <activity

@@ -114,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
                     progress.hide()
                     Log.d("API_M", "error => $error")
                     Toast.makeText(
-                        this, "Invalid username/password \n error: $error",
+                        this, "Error code: $error",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

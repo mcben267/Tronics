@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class GatepassActivity : AppCompatActivity() {
@@ -21,8 +22,8 @@ class GatepassActivity : AppCompatActivity() {
         })
 
         searchBtn.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
-            overridePendingTransition(0, 0)
+            Toast.makeText(this, "TODO", Toast.LENGTH_SHORT)
+                .show()
         })
 
     }
