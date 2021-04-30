@@ -25,7 +25,7 @@ class ResultsActivity : AppCompatActivity(), DeviceAdapter.OnItemClickListener {
     private lateinit var userMajor: TextView
     private lateinit var userID: TextView
     private lateinit var userCode: String
-    lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     val list = ArrayList<DeviceItem>()
 
 
@@ -174,22 +174,12 @@ class ResultsActivity : AppCompatActivity(), DeviceAdapter.OnItemClickListener {
         val intent = Intent(this, DecisionActivity::class.java)
         intent.putExtra("owner", userName.text)
         intent.putExtra("id", userID.text)
-        intent.putExtra("serial", currentItem.serial.substring(7))
+        intent.putExtra("serial", currentItem.serial.substring(8))
+        intent.putExtra("model", currentItem.name.substring(6))
+        intent.putExtra("pic", currentItem.imageResource)
+
         startActivity(intent)
         overridePendingTransition(0, 0)
     }
 
-    /*   private fun generateDummyList(size: Int): List<DeviceItem> {
-           val list = ArrayList<DeviceItem>()
-           for (i in 0 until size) {
-               val drawable = when (i % 3) {
-                   0 -> R.drawable.ic_account
-                   1 -> R.drawable.ic_account
-                   else -> R.drawable.ic_account
-               }
-               val item = DeviceItem(drawable, "Devices $i", "Line 2")
-               list += item
-           }
-           return list
-       }*/
 }

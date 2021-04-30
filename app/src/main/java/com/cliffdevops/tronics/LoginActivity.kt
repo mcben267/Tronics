@@ -15,7 +15,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
-private const val sharedPrefFile = "kotlinsharedpreference"
+private const val prefKey = "prefSecret"
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,8 +72,7 @@ class LoginActivity : AppCompatActivity() {
         val queue = Volley.newRequestQueue(this)
         val url = "https://myloanapp.000webhostapp.com/tronics/mobile/tronics_login.php"
         val sharedPreferences: SharedPreferences = this.getSharedPreferences(
-            sharedPrefFile,
-            Context.MODE_PRIVATE
+            prefKey, Context.MODE_PRIVATE
         )
 
         val progress = ProgressDialog(this)

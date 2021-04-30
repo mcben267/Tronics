@@ -86,6 +86,7 @@
                         android:drawableEnd="@drawable/ic_search"
                         android:gravity="center"
                         android:hint="student id / staff id"
+                        android:imeOptions="actionDone"
                         android:inputType="numberSigned|number|text"
                         android:singleLine="true"
                         android:textColor="@android:color/black"
@@ -109,7 +110,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/GatepassView"
+            android:id="@+id/logsView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:layout_marginStart="10dp"

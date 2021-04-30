@@ -7,40 +7,42 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cliffdevops.tronics.R
-import com.cliffdevops.tronics.model.DeviceItem
+import com.cliffdevops.tronics.model.LogItem
 import com.squareup.picasso.Picasso
 
-class DeviceAdapter(
-    private val deviceList: List<DeviceItem>,
+class LogAdapter(
+    private val logList: List<LogItem>,
     private val itemListener: OnItemClickListener
 ) :
-    RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
+    RecyclerView.Adapter<LogAdapter.LogViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LogViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.device_recycleview,
+            R.layout.logs_recycleview,
             parent, false
         )
-        return DeviceViewHolder(itemView)
+        return LogViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
-        val currentItem = deviceList[position]
+    override fun onBindViewHolder(holder: LogViewHolder, position: Int) {
+        val currentItem = logList[position]
         holder.textView1.text = currentItem.name
         holder.textView2.text = currentItem.serial
-        holder.textView3.text = currentItem.vendor
+        holder.textView3.text = currentItem.status
+        holder.textView4.text = currentItem.timestamp
         Picasso.get().load(currentItem.imageResource)
             .placeholder(R.drawable.ic_account)
             .into(holder.imageView);
     }
 
-    override fun getItemCount() = deviceList.size
-    inner class DeviceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+    override fun getItemCount() = logList.size
+    inner class LogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         val imageView: ImageView = itemView.findViewById(R.id.deviceImage)
         val textView1: TextView = itemView.findViewById(R.id.lbldeviceName)
         val textView2: TextView = itemView.findViewById(R.id.lblSerial)
-        val textView3: TextView = itemView.findViewById(R.id.lblVendor)
+        val textView3: TextView = itemView.findViewById(R.id.lblStatus)
+        val textView4: TextView = itemView.findViewById(R.id.lblTimeStamp)
 
         init {
             itemView.setOnClickListener(this)
@@ -48,7 +50,6 @@ class DeviceAdapter(
 
         override fun onClick(v: View?) {
             val position: Int = adapterPosition
-
             if (position != RecyclerView.NO_POSITION) {
                 itemListener.onItemClick(position)
             }
@@ -58,5 +59,5 @@ class DeviceAdapter(
     interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
-
 }
+

@@ -20,7 +20,6 @@ private const val sharedPrefFile = "kotlinsharedpreference"
 class HomeActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var searchCardView: CardView
-    //private lateinit var
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

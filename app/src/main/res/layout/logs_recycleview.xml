@@ -15,10 +15,10 @@
             android:id="@+id/lbldeviceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
             android:text="model"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/deviceImage"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +31,7 @@
             android:layout_marginTop="5dp"
             android:text="serial"
             android:textSize="18sp"
-            android:textStyle="italic"
+            android:textStyle="normal"
             app:layout_constraintStart_toEndOf="@+id/deviceImage"
             app:layout_constraintTop_toBottomOf="@+id/lbldeviceName" />
 
@@ -46,14 +46,25 @@
             app:srcCompat="@android:drawable/ic_menu_crop" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/lblTimeStamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:text="time stamp"
             android:textColor="@android:color/holo_red_dark"
             android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/deviceImage"
+            app:layout_constraintTop_toBottomOf="@+id/lblStatus" />
+
+        <TextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="status"
+            android:textColor="@android:color/holo_red_dark"
             app:layout_constraintStart_toEndOf="@+id/deviceImage"
             app:layout_constraintTop_toBottomOf="@+id/lblSerial" />
     </androidx.constraintlayout.widget.ConstraintLayout>
